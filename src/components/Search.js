@@ -35,13 +35,13 @@ export default function Search() {
     }
 
     function ShowResults(){
-        if(results!==undefined){
+        if(results!==undefined && search!==undefined){
             console.table(results.organic_results);
             return (
               <div
                 style={{
                   textAlign: "left",
-                  width: "90%",
+                  width: "50%",
                   marginLeft: "15rem",
                 }}
               >
@@ -53,15 +53,17 @@ export default function Search() {
                         marginBottom: "2rem",
                       }}
                     >
-                      <h3
+                      <h4
                         style={{
                           marginBottom: "0",
+                          color:'#1a0dab',
+                          fontWeight:'500'
                         }}
                       >
                         {item.title}
-                      </h3>
-                      <a href={item.url}>{item.url}</a>
-                      <p>{item.snippet}</p>
+                      </h4>
+                      <a href={item.url} style={{color:'green'}}>{item.url}</a>
+                      <p style={{color:"#4d5156",marginTop:"3px"}}>{item.snippet}</p>
                     </div>
                   );
                 })}
@@ -73,37 +75,47 @@ export default function Search() {
        
     }
 
-    /*function Results({item}){
-        return(
-            <div>
-                <h1>{item.title}</h1>
-                <a href={item.url}>{item.url}</a>
-                <p>{item.snippet}</p>
-            </div>
-        )
-    }*/
-
   return (
-    <div style={{
-        margin:'2rem'
-    }}>
-        {progress ? <CircularProgress style={{
-            position:'absolute',
-            top:'50%'
-        }} /> : ''}
-      <Typography variant="h3" component="h3" style={{
-          marginBottom:'3rem'
-      }}>
+    <div
+      style={{
+        margin: "2rem",
+      }}
+    >
+      {progress ? (
+        <CircularProgress
+          style={{
+            position: "absolute",
+            top: "50%",
+          }}
+        />
+      ) : (
+        ""
+      )}
+      <Typography
+        variant="h3"
+        component="h3"
+        style={{
+          marginBottom: "3rem",
+        }}
+      >
         Google Search Results
       </Typography>
-      <TextField id="search" label="Search" type="search" style={{
-          width:'50%'
-      }} onChange={handleTextchange}></TextField>
-      <Button variant="contained" color="primary" onClick={googleSearch}>
-        <Typography variant="h5" component="h5" >
+      <form autoComplete="off">
+        <TextField
+          id="search"
+          label="Search"
+          type="search"
+          style={{
+            width: "50%",
+          }}
+          onChange={handleTextchange}
+        ></TextField>
+        <Button variant="contained" color="primary" onClick={googleSearch}>
+          <Typography variant="h5" component="h5">
             Search
-        </Typography>
-      </Button>
+          </Typography>
+        </Button>
+      </form>
       <ShowResults></ShowResults>
     </div>
   );

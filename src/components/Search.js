@@ -15,18 +15,23 @@ export default function Search() {
     }
 
     function googleSearch(){
+        if (search !== undefined) {
+          const api_Key = "5391ac12f805b937eb815538808e137d";
+          const url =
+            "http://api.serpstack.com/search?access_key=" +
+            api_Key +
+            "&type=web&query=" +
+            search;
 
-        const api_Key = '5391ac12f805b937eb815538808e137d';
-        const url = 'http://api.serpstack.com/search?access_key='+api_Key+'&type=web&query='+search;
-
-        const userAction = async () => {
+          const userAction = async () => {
             setProgress(true);
             const response = await fetch(url);
             const resultJson = await response.json(); //extract JSON from the http response
             setResults(resultJson);
             setProgress(false);
-          }
+          };
           userAction();
+        }
     }
 
     function ShowResults(){
